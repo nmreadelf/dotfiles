@@ -31,7 +31,10 @@ end
 return {
   keys = mykeys,
   -- color_scheme = "Monokai Remastered",
+  -- color_scheme = "Gruvbox Dark",
   color_scheme = "Solarized Dark Higher Contrast",
+  -- font = wezterm.font("Hack Nerd Font Mono"),
   font = wezterm.font("Consolas"),
   font_size = 20.0,
+  adjust_window_size_when_changing_font_size = false,
 }
