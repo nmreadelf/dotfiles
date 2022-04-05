@@ -21,10 +21,18 @@ local mykeys = {
 }
 
 for i = 1, 8 do
+  -- go to one tab
   table.insert(mykeys, {
     key=tostring(i),
     mods=mainKey,
     action=wezterm.action{ActivateTab=i-1},
+  })
+
+  -- move current tab to a specified position
+  table.insert(mykeys, {
+    key=tostring(i),
+    mods="CTRL|ALT",
+    action=wezterm.action{MoveTab=i-1},
   })
 end
 
