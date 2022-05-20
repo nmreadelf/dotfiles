@@ -1,0 +1,7 @@
+alias gmv='git commit -v'
+# wget https://cdn.ipip.net/17mon/country.zip
+
+alias k='kubectl --kubeconfig=$HOME/.kube/kube.config'
+alias gmv='git commit -v'
+alias gsb='git rebase'
+
