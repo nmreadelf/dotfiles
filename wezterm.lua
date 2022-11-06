@@ -18,6 +18,7 @@ local mykeys = {
     {key="]", mods=mainKey, action=wezterm.action{ActivateTabRelative=1}},
     {key="[", mods=mainKey, action=wezterm.action{ActivateTabRelative=-1}},
     {key="w", mods=mainKey, action=wezterm.action{CloseCurrentTab={confirm=true}}},
+    {key="Enter", mods="CTRL", action=wezterm.action.ToggleFullScreen},
 }
 
 for i = 1, 8 do
@@ -37,6 +38,15 @@ for i = 1, 8 do
 end
 
 return {
+  tab_bar_at_bottom = true,
+  window_padding = {
+    left = 12,
+    right = 8,
+    top = 12,
+    bottom = 8,
+  },
+  tab_max_width = 24,
+  enable_scroll_bar = true,
   keys = mykeys,
   -- color_scheme = "Monokai Remastered",
   -- color_scheme = "Gruvbox Dark",
@@ -45,4 +55,6 @@ return {
   font = wezterm.font("Consolas"),
   font_size = 20.0,
   adjust_window_size_when_changing_font_size = false,
+  initial_cols = 272,
+  initial_rows = 59,
 }
