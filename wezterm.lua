@@ -10,11 +10,10 @@ else
     mainKey = "ALT"
 end
 
-local SHELL = "bash"
 local mykeys = {
     {key="C", mods=mainKey, action="Copy"},
     {key="V", mods=mainKey, action="Paste"},
-    {key="t", mods=mainKey, action=wezterm.action{SpawnCommandInNewTab={ args={SHELL} }}},
+    {key="t", mods=mainKey, action=wezterm.action{SpawnCommandInNewTab={}}},
     {key="]", mods=mainKey, action=wezterm.action{ActivateTabRelative=1}},
     {key="[", mods=mainKey, action=wezterm.action{ActivateTabRelative=-1}},
     {key="w", mods=mainKey, action=wezterm.action{CloseCurrentTab={confirm=true}}},
