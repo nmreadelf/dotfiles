@@ -1,8 +1,9 @@
 patch:
   schema_list:
+    - schema: luna_pinyin_simp
     - schema: double_pinyin_flypy # 小鹤双拼
 
-  menu/page_size: 9 # 候选词个数
+  menu/page_size: 5 # 候选词个数
 switches:
   - name: show_es
     reset: 1
