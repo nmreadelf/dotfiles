@@ -5,3 +5,12 @@
 	pager = tig
 [color]
 	ui = off
+[gpg]
+        program = gpg2
+[commit]
+        gpgsign = true
+[pull]
+        ff = only
+[push]
+        default = simple
+        autoSetupRemote = true
