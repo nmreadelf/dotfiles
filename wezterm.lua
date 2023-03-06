@@ -18,6 +18,7 @@ local mykeys = {
     {key="[", mods=mainKey, action=wezterm.action{ActivateTabRelative=-1}},
     {key="w", mods=mainKey, action=wezterm.action{CloseCurrentTab={confirm=true}}},
     {key="Enter", mods="CTRL", action=wezterm.action.ToggleFullScreen},
+    {key='"', mods="CTRL|SHIFT", action=wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' }},
 }
 
 for i = 1, 8 do
