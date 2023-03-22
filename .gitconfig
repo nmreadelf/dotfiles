@@ -11,6 +11,7 @@
         gpgsign = true
 [pull]
         ff = only
+	rebase = true
 [push]
         default = simple
         autoSetupRemote = true
