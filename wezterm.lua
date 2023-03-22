@@ -11,8 +11,8 @@ else
 end
 
 local mykeys = {
-    {key="C", mods=mainKey, action="Copy"},
-    {key="V", mods=mainKey, action="Paste"},
+    {key="c", mods="ALT", action= wezterm.action.CopyTo 'ClipboardAndPrimarySelection'},
+    {key="v", mods="ALT", action= wezterm.action.PasteFrom 'Clipboard'},
     {key="t", mods=mainKey, action=wezterm.action{SpawnCommandInNewTab={}}},
     {key="]", mods=mainKey, action=wezterm.action{ActivateTabRelative=1}},
     {key="[", mods=mainKey, action=wezterm.action{ActivateTabRelative=-1}},
