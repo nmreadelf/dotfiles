@@ -1,5 +1,6 @@
 local wezterm = require 'wezterm';
 local mainKey = "ALT"
+local act = wezterm.action
 
 local BinaryFormat = package.cpath:match("%p[\\|/]?%p(%a+)")
 if BinaryFormat == "dll" then
@@ -11,14 +12,16 @@ else
 end
 
 local mykeys = {
-    {key="c", mods="ALT", action= wezterm.action.CopyTo 'ClipboardAndPrimarySelection'},
-    {key="v", mods="ALT", action= wezterm.action.PasteFrom 'Clipboard'},
-    {key="t", mods=mainKey, action=wezterm.action{SpawnCommandInNewTab={}}},
-    {key="]", mods=mainKey, action=wezterm.action{ActivateTabRelative=1}},
-    {key="[", mods=mainKey, action=wezterm.action{ActivateTabRelative=-1}},
-    {key="w", mods=mainKey, action=wezterm.action{CloseCurrentTab={confirm=true}}},
-    {key="Enter", mods="CTRL", action=wezterm.action.ToggleFullScreen},
-    {key='"', mods="CTRL|SHIFT", action=wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' }},
+    {key="c",     mods="ALT",         action= wezterm.action.CopyTo 'ClipboardAndPrimarySelection'},
+    {key="v",     mods="ALT",         action= wezterm.action.PasteFrom 'Clipboard'},
+    {key="t",     mods=mainKey,       action=wezterm.action{SpawnCommandInNewTab={}}},
+    {key="]",     mods=mainKey,       action=wezterm.action{ActivateTabRelative=1}},
+    {key="[",     mods=mainKey,       action=wezterm.action{ActivateTabRelative=-1}},
+    {key="w",     mods=mainKey,       action=wezterm.action{CloseCurrentTab={confirm=true}}},
+    {key="Enter", mods="CTRL",        action=wezterm.action.ToggleFullScreen},
+    {key='"',     mods="CTRL|SHIFT",  action=wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' }},
+    {key='{',     mods='SHIFT|ALT',   action = act.MoveTabRelative(-1) },
+    {key='}',     mods='SHIFT|ALT',   action = act.MoveTabRelative(1) },
 }
 
 for i = 1, 8 do
