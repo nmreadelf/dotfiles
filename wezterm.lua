@@ -22,6 +22,9 @@ local mykeys = {
     {key='"',     mods="CTRL|SHIFT",  action=wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' }},
     {key='{',     mods='SHIFT|ALT',   action = act.MoveTabRelative(-1) },
     {key='}',     mods='SHIFT|ALT',   action = act.MoveTabRelative(1) },
+    {key='b',     mods="SHIFT|ALT",   action = wezterm.action.SpawnCommandInNewTab {
+                                          args = { 'c:\\cygwin64\\bin\\bash.exe -i -l' }
+                                      }, },
 }
 
 for i = 1, 8 do
