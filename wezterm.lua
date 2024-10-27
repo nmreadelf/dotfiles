@@ -4,14 +4,13 @@ local act = wezterm.action
 local mux = wezterm.mux
 local launch_menu = {}
 
-local BinaryFormat = package.cpath:match("%p[\\|/]?%p(%a+)")
-if BinaryFormat == "dll" then
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   mainKey = "META"
   table.insert(launch_menu, {
     label = 'cygwin',
     args = { 'd:\\cygwin64\\bin\\bash.exe', '-i', '-l' },
   })
-elseif BinaryFormat == "dylib" then
+elseif wezterm.target_triple == "x86_64-apple-darwin" or wezterm.target_triple == "aarch64-apple-darwin" then
   mainKey = "META"
 else
   mainKey = "ALT"
