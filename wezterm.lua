@@ -1,34 +1,43 @@
 local wezterm = require 'wezterm';
 local mainKey = "ALT"
 local act = wezterm.action
+local mux = wezterm.mux
+local launch_menu = {}
 
 local BinaryFormat = package.cpath:match("%p[\\|/]?%p(%a+)")
 if BinaryFormat == "dll" then
-    mainKey = "META"
+  mainKey = "META"
+  table.insert(launch_menu, {
+    label = 'cygwin',
+    args = { 'd:\\cygwin64\\bin\\bash.exe', '-i', '-l' },
+  })
 elseif BinaryFormat == "dylib" then
-    mainKey = "META"
+  mainKey = "META"
 else
-    mainKey = "ALT"
+  mainKey = "ALT"
 end
 
 local mykeys = {
-    {key="c",     mods="ALT",         action= wezterm.action.CopyTo 'ClipboardAndPrimarySelection'},
-    {key="v",     mods="ALT",         action= wezterm.action.PasteFrom 'Clipboard'},
-    {key="t",     mods=mainKey,       action=wezterm.action{SpawnCommandInNewTab={}}},
-    {key="]",     mods=mainKey,       action=wezterm.action{ActivateTabRelative=1}},
-    {key="[",     mods=mainKey,       action=wezterm.action{ActivateTabRelative=-1}},
-    {key="w",     mods=mainKey,       action=wezterm.action{CloseCurrentTab={confirm=true}}},
-    {key="Enter", mods="CTRL",        action=wezterm.action.ToggleFullScreen},
-    {key='"',     mods="CTRL|SHIFT",  action=wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' }},
-    {key='{',     mods='SHIFT|ALT',   action = act.MoveTabRelative(-1) },
-    {key='}',     mods='SHIFT|ALT',   action = act.MoveTabRelative(1) },
-    {key='b',     mods="SHIFT|ALT",   action = wezterm.action.SpawnCommandInNewTab {
-                                          args = { 'c:\\cygwin64\\bin\\bash.exe -i -l' }
-                                      }, },
+  {key="c",     mods="ALT",         action=wezterm.action.CopyTo 'ClipboardAndPrimarySelection'},
+  {key="v",     mods="ALT",         action=wezterm.action.PasteFrom 'Clipboard'},
+  {key="t",     mods=mainKey,       action=wezterm.action{SpawnCommandInNewTab={}}},
+  {key="]",     mods=mainKey,       action=wezterm.action{ActivateTabRelative=1}},
+  {key="[",     mods=mainKey,       action=wezterm.action{ActivateTabRelative=-1}},
+  {key="w",     mods=mainKey,       action=wezterm.action{CloseCurrentTab={confirm=true}}},
+  {key="Enter", mods="CTRL",        action=wezterm.action.ToggleFullScreen},
+  {key='%',     mods="CTRL|SHIFT",  action=wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' }},
+  {key='"',     mods="CTRL|SHIFT",  action=wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' }},
+  {key='h',     mods="CTRL|SHIFT",  action=act.AdjustPaneSize { 'Left', 5 }},
+  {key='k',     mods="CTRL|SHIFT",  action=act.AdjustPaneSize { 'Up', 5 }},
+  {key='j',     mods="CTRL|SHIFT",  action=act.AdjustPaneSize { 'Down', 5 }},
+  {key='l',     mods="CTRL|SHIFT",  action=act.AdjustPaneSize { 'Right', 5 }},
+  {key='{',     mods='SHIFT|ALT',   action=act.MoveTabRelative(-1) },
+  {key='}',     mods='SHIFT|ALT',   action=act.MoveTabRelative(1) },
+  {key='F9',    mods='ALT',         action=wezterm.action.ShowTabNavigator },
+  {key='l',    mods='ALT',         action=wezterm.action.ShowLauncher },
 }
 
 for i = 1, 8 do
-  -- go to one tab
   table.insert(mykeys, {
     key=tostring(i),
     mods=mainKey,
@@ -43,7 +52,13 @@ for i = 1, 8 do
   })
 end
 
+wezterm.on("gui-startup", function()
+  local tab, pane, window = mux.spawn_window{}
+  window:gui_window():maximize()
+end)
+
 return {
+  prefer_egl = false,
   tab_bar_at_bottom = true,
   window_padding = {
     left = 12,
@@ -51,6 +66,17 @@ return {
     top = 12,
     bottom = 8,
   },
+  audible_bell = "Disabled",
+  visual_bell = {
+    fade_in_function = 'EaseIn',
+    fade_in_duration_ms = 150,
+    fade_out_function = 'EaseOut',
+    fade_out_duration_ms = 150,
+  },
+  colors = {
+    visual_bell = '#202020'
+  },
+  launch_menu = launch_menu,
   tab_max_width = 24,
   enable_scroll_bar = true,
   keys = mykeys,
